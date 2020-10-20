@@ -2,7 +2,7 @@
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: xx-small;
   line-height: 1.4;
   color: #333333;
   background-color: #ffffff;
@@ -10,15 +10,24 @@ body {
 
 h1 {
   margin-bottom: 10px;
-  font-size: 32px;
+   font-size: 20px;
 }
 
-h2 {
-  font-size: 22px;
+ h2 {
+  font-size: 20px;
 }
 
 h3 {
   font-size: 16px;
+} 
+
+.service-notes{
+    font-size: small;
+    font-style: italic;
+}
+
+.included-dates{
+  font-style: italic;
 }
 
 @media screen and (max-width: 767px) {
@@ -147,7 +156,7 @@ h3 {
 }
 
 .timetable thead tr {
-  background: #72b1e6;
+  background: #00529f;
 }
 
 .timetable thead tr a {
@@ -196,6 +205,8 @@ h3 {
 .timetable table > thead > tr > th,
 .timetable table > thead > tr > td {
   border-bottom-width: 2px;
+  color: #fff700;
+  font-weight: 900;
 }
 
 .timetable table > tbody > tr:nth-of-type(odd) {

@@ -18,13 +18,16 @@
     } else if (trip.trip_short_name) {
       tripName += trip.trip_short_name;
     } else {
-      tripName += `Run #${idx + 1}`;
+      //tripName += `c.sa ${idx + 1}`;
+      tripName += `${idx + 1}`;
     }
-  
-    if (timetableHasDifferentDays(timetable)) {
+
+    let bacino = trip.route_id.charAt(trip.route_id.length-1);
+    if (bacino !== 'U')
+    {
       tripName += ` ${trip.dayList}`;
     }
-  
+
     return tripName;
   }
 

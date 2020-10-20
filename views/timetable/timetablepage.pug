@@ -7,9 +7,12 @@ include formatting_functions.pug
       .row.mt-4.mb-4
         .col-md-12
           h1.timetable-page-label
+            a(href='http://www.gtt.to.it')
+              img(src='http://www.gtt.to.it/cms/images/logo-gtt.png' alt='GTT')
             if timetablePage.routeColors && timetablePage.routeColors.length === 1
               .route-color-swatch-large(style=`background-color: #${timetablePage.routeColors[0]}`)
-            span= timetablePage.timetable_page_label
+            span
+              a(href=`${timetablePage.route_url}`)= timetablePage.timetable_page_label
           if config.effectiveDate
             .effective-date= `Effective ${config.effectiveDate}`
 
@@ -19,8 +22,11 @@ include formatting_functions.pug
       .timetable(id=`timetable_id_${formatHtmlId(timetable.timetable_id)}` data-day-list=timetable.dayList data-direction-name=timetable.direction_name data-timetable-id=timetable.timetable_id data-direction-id=timetable.direction_id data-route-id=timetable.route_ids.join('_'))
         .row
           .col-md-12
-            h2.description= `${timetable.timetable_label} | ${timetable.dayListLong}`
-            .service-notes= timetable.service_notes
+            h2.description= timetable.timetable_label
+            h3.description= timetable.dayListLong
+            .service-notes
+              if timetable.service_notes === 'frequenza'
+                p Linea gestita a frequenza dalle 7.00 alle 21.00: <a href="http://www.gtt.to.it/cms/risorse/urbana/intervalli_sito.pdf">consulta le frequenze dei passaggi</a>.
 
         if config.showMap
           .row
@@ -44,6 +50,12 @@ include formatting_functions.pug
               include timetable_hourly.pug
             else if timetable.orientation === 'vertical'
               include timetable_vertical.pug
+            else if config.defaultOrientation === 'horizontal'
+              include timetable_horizontal.pug
+            else if config.defaultOrientation === 'hourly'
+              include timetable_hourly.pug
+            else
+              include timetable_vertical.pug
 
         .row.timetable-bottom
           if timetable.requestPickupSymbolUsed || timetable.noPickupSymbolUsed || timetable.requestDropoffSymbolUsed || timetable.noDropoffSymbolUsed || timetable.noServiceSymbolUsed || timetable.interpolatedStopSymbolUsed
@@ -65,6 +77,3 @@ include formatting_functions.pug
             .col-md-4
               .included-dates= `${config.serviceProvidedOnText}: ${timetable.calendarDates.includedDates.join(', ')}`
 
-          if timetable.calendarDates.excludedDates.length
-            .col-md-4
-              .excluded-dates= `${config.serviceNotProvidedOnText}: ${timetable.calendarDates.excludedDates.join(', ')}`

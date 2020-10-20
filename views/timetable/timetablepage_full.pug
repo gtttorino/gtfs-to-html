@@ -4,7 +4,22 @@ block content
 
 block extraHeader
   script(src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous")
-
+  if config.removeEmptyRows
+    script.
+      $(document).ready(function () {
+        $('tbody tr').filter(
+          function () {
+            return $(this).find('td.stop-time').length == $(this).find('td.skipped').length;
+          }).remove();
+      });
+    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-8288125-2")
+    script.
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-8288125-2');
+  
   if config.menuType === 'radio'
     script(src=`${config.assetPath}js/timetable-menu.js`)
 

@@ -1,5 +1,9 @@
+@page { 
+        size: A3 landscape;
+}
 body {
   -webkit-print-color-adjust: exact;
+  font-size: xx-small;
 }
 
 .timetable .table-container {
